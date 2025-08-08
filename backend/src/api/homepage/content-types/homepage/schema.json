@@ -1,7 +1,7 @@
 {
   "kind": "singleType",
   "collectionName": "homepage",
-  "info": { "singularName": "homepage", "pluralName": "homepage", "displayName": "Homepage" },
+  "info": { "singularName": "homepage", "pluralName": "homepages", "displayName": "Homepage" },
   "attributes": {
     "hero": { "type": "richtext" },
     "featuredProfiles": { "type": "relation", "relation": "oneToMany", "target": "api::profile.profile" },

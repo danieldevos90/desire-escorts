@@ -4,7 +4,8 @@ export default factories.createCoreController('api::profile.profile', ({ strapi 
   async findOne(ctx) {
     // Support lookup by slug, including site-specific overrides
     const idOrSlug = ctx.params.id;
-    const host = ctx.request?.header['x-forwarded-host'] || ctx.request?.host;
+    const rawHost = ctx.request?.header['x-forwarded-host'] || ctx.request?.host || '';
+    const host = Array.isArray(rawHost) ? rawHost[0] : rawHost;
 
     // Try direct id first
     if (/^\d+$/.test(idOrSlug)) {
