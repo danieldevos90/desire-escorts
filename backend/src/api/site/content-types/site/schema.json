@@ -5,6 +5,8 @@
   "attributes": {
     "name": { "type": "string", "required": true },
     "domain": { "type": "string", "unique": true, "required": true },
+    "brand": { "type": "component", "component": "brand.brand" },
+    "seoDefaults": { "type": "component", "component": "seo.seo" },
     "profiles": { "type": "relation", "relation": "manyToMany", "target": "api::profile.profile", "mappedBy": "sites" },
     "pages": { "type": "relation", "relation": "oneToMany", "target": "api::page.page", "mappedBy": "site" }
   }

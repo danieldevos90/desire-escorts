@@ -1,0 +1,13 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepage",
+  "info": { "singularName": "homepage", "pluralName": "homepage", "displayName": "Homepage" },
+  "attributes": {
+    "hero": { "type": "richtext" },
+    "featuredProfiles": { "type": "relation", "relation": "oneToMany", "target": "api::profile.profile" },
+    "featuredCities": { "type": "relation", "relation": "oneToMany", "target": "api::city.city" },
+    "seo": { "type": "component", "component": "seo.seo" }
+  }
+}
+
+
