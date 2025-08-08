@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sites",
+  "info": { "singularName": "site", "pluralName": "sites", "displayName": "Site" },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "domain": { "type": "string", "unique": true, "required": true },
+    "profiles": { "type": "relation", "relation": "manyToMany", "target": "api::profile.profile", "mappedBy": "sites" },
+    "pages": { "type": "relation", "relation": "oneToMany", "target": "api::page.page", "mappedBy": "site" }
+  }
+}
+
+

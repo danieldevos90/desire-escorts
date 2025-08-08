@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "profiles",
+  "info": { "singularName": "profile", "pluralName": "profiles", "displayName": "Escort" },
+  "attributes": {
+    "name": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "name", "required": true },
+    "shortBio": { "type": "text" },
+    "bio": { "type": "richtext" },
+    "age": { "type": "integer" },
+    "height": { "type": "integer" },
+    "nationality": { "type": "string" },
+    "photos": { "type": "media", "multiple": true },
+    "rates": { "type": "component", "repeatable": true, "component": "rate-item.rate-item" },
+    "availability": { "type": "component", "repeatable": true, "component": "availability.availability" },
+    "contact": { "type": "component", "repeatable": false, "component": "contact.contact" },
+    "seo": { "type": "component", "repeatable": false, "component": "seo.seo" },
+    "verified": { "type": "boolean" },
+    "featured": { "type": "boolean" },
+    "sites": { "type": "relation", "relation": "manyToMany", "target": "api::site.site", "inversedBy": "profiles" },
+    "city": { "type": "relation", "relation": "manyToOne", "target": "api::city.city", "inversedBy": "profiles" },
+    "services": { "type": "relation", "relation": "manyToMany", "target": "api::service.service", "inversedBy": "profiles" }
+  }
+}
+
+

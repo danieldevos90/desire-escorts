@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_rate_item_rate_items",
+  "info": { "displayName": "RateItem" },
+  "attributes": {
+    "label": { "type": "string" },
+    "price": { "type": "decimal" },
+    "currency": { "type": "string" },
+    "includes": { "type": "text" }
+  }
+}
+
+

@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_contact_contacts",
+  "info": {
+    "displayName": "Contact"
+  },
+  "attributes": {
+    "phone": { "type": "string" },
+    "whatsapp": { "type": "string" },
+    "telegram": { "type": "string" }
+  }
+}
+
+

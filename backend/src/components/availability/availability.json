@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_availability_availabilities",
+  "info": { "displayName": "Availability" },
+  "attributes": {
+    "dayOfWeek": { "type": "enumeration", "enum": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"] },
+    "startTime": { "type": "string" },
+    "endTime": { "type": "string" }
+  }
+}
+
+
