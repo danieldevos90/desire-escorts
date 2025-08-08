@@ -1,3 +1,4 @@
+import { headers as nextHeaders } from "next/headers";
 export type FetchOptions = {
   path: string;
   searchParams?: Record<string, string | number | boolean | undefined>;
@@ -15,6 +16,12 @@ export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOpti
   }
 
   const headers = new Headers(init?.headers as HeadersInit);
+  // Propagate the site host to Strapi so server-side policy can scope by site
+  if (typeof window === "undefined") {
+    const incoming = await nextHeaders();
+    const host = incoming.get("host");
+    if (host) headers.set("x-forwarded-host", host);
+  }
 
   const token = process.env.STRAPI_API_TOKEN;
   if (token) headers.set("Authorization", `Bearer ${token}`);
