@@ -22,7 +22,7 @@ export default function SearchPage() {
         const res = await fetch(url, { signal: controller.signal });
         const data = await res.json();
         setResults(data.data || []);
-      } catch (_) {
+      } catch {
         // ignore
       } finally {
         setLoading(false);

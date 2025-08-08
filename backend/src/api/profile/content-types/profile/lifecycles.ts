@@ -8,13 +8,13 @@ export default {
   async afterCreate(event: any) {
     const { result } = event;
     const domains = (result.sites || []).map((s: any) => s.domain).filter(Boolean);
-    const { revalidateByDomains } = await import('../../../utils/revalidate');
+    const { revalidateByDomains } = await import('../../../../utils/revalidate');
     await revalidateByDomains(domains);
   },
   async afterUpdate(event: any) {
     const { result } = event;
     const domains = (result.sites || []).map((s: any) => s.domain).filter(Boolean);
-    const { revalidateByDomains } = await import('../../../utils/revalidate');
+    const { revalidateByDomains } = await import('../../../../utils/revalidate');
     await revalidateByDomains(domains);
   },
 };
