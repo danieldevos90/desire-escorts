@@ -19,7 +19,8 @@
     "featured": { "type": "boolean" },
     "sites": { "type": "relation", "relation": "manyToMany", "target": "api::site.site", "inversedBy": "profiles" },
     "city": { "type": "relation", "relation": "manyToOne", "target": "api::city.city", "inversedBy": "profiles" },
-    "services": { "type": "relation", "relation": "manyToMany", "target": "api::service.service", "inversedBy": "profiles" }
+    "services": { "type": "relation", "relation": "manyToMany", "target": "api::service.service", "inversedBy": "profiles" },
+    "languages": { "type": "relation", "relation": "manyToMany", "target": "api::language.language", "inversedBy": "profiles" }
     ,
     "siteOverrides": { "type": "component", "repeatable": true, "component": "site-overrides.site-overrides" }
   }
