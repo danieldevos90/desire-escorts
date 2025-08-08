@@ -32,6 +32,7 @@ export interface BrandBrand extends Struct.ComponentSchema {
   };
   attributes: {
     fontFamily: Schema.Attribute.String;
+    footerLinks: Schema.Attribute.Component<'navigation.link', true>;
     logo: Schema.Attribute.Media;
     primaryColor: Schema.Attribute.String;
     secondaryColor: Schema.Attribute.String;
@@ -47,6 +48,17 @@ export interface ContactContact extends Struct.ComponentSchema {
     phone: Schema.Attribute.String;
     telegram: Schema.Attribute.String;
     whatsapp: Schema.Attribute.String;
+  };
+}
+
+export interface NavigationLink extends Struct.ComponentSchema {
+  collectionName: 'components_navigation_links';
+  info: {
+    displayName: 'Link';
+  };
+  attributes: {
+    href: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -106,6 +118,7 @@ declare module '@strapi/strapi' {
       'availability.availability': AvailabilityAvailability;
       'brand.brand': BrandBrand;
       'contact.contact': ContactContact;
+      'navigation.link': NavigationLink;
       'rate-item.rate-item': RateItemRateItem;
       'seo.seo': SeoSeo;
       'site-overrides.site-overrides': SiteOverridesSiteOverrides;

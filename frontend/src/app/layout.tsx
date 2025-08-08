@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "../styles/general.css";
 import AgeGate from "@/components/AgeGate";
 import CookieConsent from "@/components/CookieConsent";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: {
@@ -33,12 +26,13 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="/theme.css" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <AgeGate>
           <Header />
           {children}
         </AgeGate>
         <CookieConsent />
+        <Footer />
       </body>
     </html>
   );

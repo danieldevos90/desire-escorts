@@ -1,6 +1,12 @@
 import { fetchFromStrapi } from "@/lib/api";
 import Hero from "@/components/Hero";
 import EscortGrid from "@/components/EscortGrid";
+import Link from "next/link";
+import HomeIntro from "@/components/HomeIntro";
+import HomeWhyUs from "@/components/HomeWhyUs";
+import HomeBenefits from "@/components/HomeBenefits";
+import HomeCTA from "@/components/HomeCTA";
+import HomeNews from "@/components/HomeNews";
 import type { Escort } from "@/types/strapi";
 
 type ProfileItem = Escort;
@@ -9,6 +15,10 @@ type Home = {
   hero?: string;
   featuredProfiles?: ProfileItem[];
   featuredCities?: CityItem[];
+  intro?: string;
+  whyUs?: string;
+  benefits?: Array<{ label?: string }>;
+  cta?: { phone?: string; whatsapp?: string; telegram?: string };
 };
 
 export default async function Home() {
@@ -39,6 +49,10 @@ export default async function Home() {
   return (
     <main>
       <Hero title="Desire Escorts" subtitle="Premium escort directory" ctaHref="/escorts" ctaLabel="Browse Escorts" />
+      {/* Intro */}
+      <HomeIntro html={home?.intro} />
+      {/* Why Us */}
+      <HomeWhyUs html={home?.whyUs} />
       <section className="section">
         <div className="container">
           <h2>Featured Escorts</h2>
@@ -51,6 +65,14 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      {/* Benefits */}
+      <HomeBenefits items={home?.benefits} />
+      {/* CTA */}
+      <HomeCTA cta={home?.cta} />
+      {/* News */}
+      <HomeNews />
     </main>
   );
 }
+
+// moved to component

@@ -512,15 +512,18 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    benefits: Schema.Attribute.Component<'tag.tag', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    cta: Schema.Attribute.Component<'contact.contact', false>;
     featuredCities: Schema.Attribute.Relation<'oneToMany', 'api::city.city'>;
     featuredProfiles: Schema.Attribute.Relation<
       'oneToMany',
       'api::profile.profile'
     >;
     hero: Schema.Attribute.RichText;
+    intro: Schema.Attribute.RichText;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -532,6 +535,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    whyUs: Schema.Attribute.RichText;
   };
 }
 

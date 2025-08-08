@@ -6,7 +6,11 @@
     "hero": { "type": "richtext" },
     "featuredProfiles": { "type": "relation", "relation": "oneToMany", "target": "api::profile.profile" },
     "featuredCities": { "type": "relation", "relation": "oneToMany", "target": "api::city.city" },
-    "seo": { "type": "component", "component": "seo.seo" }
+    "seo": { "type": "component", "component": "seo.seo" },
+    "intro": { "type": "richtext" },
+    "whyUs": { "type": "richtext" },
+    "benefits": { "type": "component", "repeatable": true, "component": "tag.tag" },
+    "cta": { "type": "component", "component": "contact.contact" }
   }
 }
 

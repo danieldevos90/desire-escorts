@@ -179,15 +179,19 @@ export default {
       });
       site = await publishIfUnpublished('api::site.site', site);
 
-      let ams = await ensureOne('api::city.city', { slug: { $eq: 'amsterdam' } }, { name: 'Amsterdam', slug: 'amsterdam' });
-      let rtd = await ensureOne('api::city.city', { slug: { $eq: 'rotterdam' } }, { name: 'Rotterdam', slug: 'rotterdam' });
+      let ams = await ensureOne('api::city.city', { slug: { $eq: 'amsterdam' } }, { name: 'Amsterdam', slug: 'amsterdam', sites: [site.id] });
+      let rtd = await ensureOne('api::city.city', { slug: { $eq: 'rotterdam' } }, { name: 'Rotterdam', slug: 'rotterdam', sites: [site.id] });
       ams = await publishIfUnpublished('api::city.city', ams);
       rtd = await publishIfUnpublished('api::city.city', rtd);
 
       let massage = await ensureOne('api::service.service', { slug: { $eq: 'massage' } }, { name: 'Massage', slug: 'massage' });
       let companion = await ensureOne('api::service.service', { slug: { $eq: 'companionship' } }, { name: 'Companionship', slug: 'companionship' });
+      let dinner = await ensureOne('api::service.service', { slug: { $eq: 'dinner-date' } }, { name: 'Dinner Date', slug: 'dinner-date' });
+      let gfe = await ensureOne('api::service.service', { slug: { $eq: 'girlfriend-experience' } }, { name: 'Girlfriend Experience', slug: 'girlfriend-experience' });
       massage = await publishIfUnpublished('api::service.service', massage);
       companion = await publishIfUnpublished('api::service.service', companion);
+      dinner = await publishIfUnpublished('api::service.service', dinner);
+      gfe = await publishIfUnpublished('api::service.service', gfe);
 
       let english = await ensureOne('api::language.language', { slug: { $eq: 'english' } }, { name: 'English', slug: 'english' });
       let dutch = await ensureOne('api::language.language', { slug: { $eq: 'dutch' } }, { name: 'Dutch', slug: 'dutch' });
@@ -197,7 +201,7 @@ export default {
       let anna = await ensureOne('api::profile.profile', { slug: { $eq: 'anna' } }, {
         name: 'Anna', slug: 'anna', shortBio: 'Sample profile', verified: true, featured: true,
         city: ams.id,
-        services: [massage.id],
+        services: [massage.id, gfe.id],
         languages: [english.id],
         sites: [site.id],
         rates: [{ __component: 'rate-item.rate-item', label: '1 hour', price: 200, currency: 'EUR', includes: 'Intro meeting' }],
@@ -208,17 +212,46 @@ export default {
       let sofia = await ensureOne('api::profile.profile', { slug: { $eq: 'sofia' } }, {
         name: 'Sofia', slug: 'sofia', shortBio: 'Sample profile', verified: true, featured: true,
         city: rtd.id,
-        services: [companion.id],
+        services: [companion.id, dinner.id],
         languages: [dutch.id],
         sites: [site.id],
       });
       sofia = await publishIfUnpublished('api::profile.profile', sofia);
+
+      // News
+      const news1 = await ensureOne('api::news.news', { slug: { $eq: 'grand-opening' } }, { title: 'Grand opening', slug: 'grand-opening', excerpt: 'We are live with a curated selection of companions.', body: '<p>We are thrilled to launch our local site.</p>', site: site.id });
+      const news2 = await ensureOne('api::news.news', { slug: { $eq: 'new-profiles-added' } }, { title: 'New profiles added', slug: 'new-profiles-added', excerpt: 'Fresh companions now available in Amsterdam and Rotterdam.', body: '<p>Discover newly verified profiles this week.</p>', site: site.id });
+      await publishIfUnpublished('api::news.news', news1);
+      await publishIfUnpublished('api::news.news', news2);
+      sofia = await publishIfUnpublished('api::profile.profile', sofia);
+
+      // Pages: contact, about, services-info
+      const contactPage = await ensureOne('api::page.page', { slug: { $eq: 'contact' } }, {
+        title: 'Contact', slug: 'contact', body: '<p>For enquiries, please email <a href="mailto:info@example.com">info@example.com</a> or call +31 20 123 4567.</p>' , site: site.id,
+      });
+      await publishIfUnpublished('api::page.page', contactPage);
+      const aboutPage = await ensureOne('api::page.page', { slug: { $eq: 'about' } }, {
+        title: 'About Us', slug: 'about', body: '<p>We are a curated escort directory focused on verified profiles and discretion.</p>', site: site.id,
+      });
+      await publishIfUnpublished('api::page.page', aboutPage);
+      const servicesInfo = await ensureOne('api::page.page', { slug: { $eq: 'services-info' } }, {
+        title: 'Services & Etiquette', slug: 'services-info', body: '<p>Learn about available services, etiquette, and booking process.</p>', site: site.id,
+      });
+      await publishIfUnpublished('api::page.page', servicesInfo);
 
       const existingHomepage = await es.findMany('api::homepage.homepage', { limit: 1 });
       if (existingHomepage && existingHomepage.length) {
         await es.update('api::homepage.homepage', existingHomepage[0].id, {
           data: {
             hero: '<p>Welcome to Desire Escorts (local)</p>',
+            intro: '<p>Explore a curated selection of verified companions. Book with confidence and discretion.</p>',
+            whyUs: '<ul><li>Verified profiles</li><li>Discreet communication</li><li>Transparent rates</li></ul>',
+            benefits: [
+              { __component: 'tag.tag', label: 'Verified Escorts' },
+              { __component: 'tag.tag', label: 'Discreet Booking' },
+              { __component: 'tag.tag', label: 'Fast Response' }
+            ],
+            cta: { __component: 'contact.contact', phone: '+31 20 123 4567', whatsapp: '+31 612345678', telegram: 'desire_support' },
             featuredProfiles: [anna.id, sofia.id],
             featuredCities: [ams.id, rtd.id],
             publishedAt: new Date().toISOString(),
@@ -228,12 +261,32 @@ export default {
         await es.create('api::homepage.homepage', {
           data: {
             hero: '<p>Welcome to Desire Escorts (local)</p>',
+            intro: '<p>Explore a curated selection of verified companions. Book with confidence and discretion.</p>',
+            whyUs: '<ul><li>Verified profiles</li><li>Discreet communication</li><li>Transparent rates</li></ul>',
+            benefits: [
+              { __component: 'tag.tag', label: 'Verified Escorts' },
+              { __component: 'tag.tag', label: 'Discreet Booking' },
+              { __component: 'tag.tag', label: 'Fast Response' }
+            ],
+            cta: { __component: 'contact.contact', phone: '+31 20 123 4567', whatsapp: '+31 612345678', telegram: 'desire_support' },
             featuredProfiles: [anna.id, sofia.id],
             featuredCities: [ams.id, rtd.id],
             publishedAt: new Date().toISOString(),
           },
         });
       }
+      // Footer links in brand
+      try {
+        const currentSite = await es.findOne('api::site.site', site.id, { populate: ['brand'] });
+        const brand = currentSite?.brand || {};
+        const footerLinks = [
+          { __component: 'navigation.link', label: 'About', href: '/pages/about' },
+          { __component: 'navigation.link', label: 'Contact', href: '/pages/contact' },
+          { __component: 'navigation.link', label: 'Services Info', href: '/pages/services-info' },
+        ];
+        await es.update('api::site.site', site.id, { data: { brand: { ...(brand || {}), footerLinks } } as any });
+      } catch {}
+
       strapi.log.info('Local seed completed');
     } catch (err: any) {
       strapi.log.warn(`Local seed skipped/failed: ${err?.message || err}`);

@@ -5,7 +5,8 @@
     "logo": { "type": "media", "required": false },
     "primaryColor": { "type": "string" },
     "secondaryColor": { "type": "string" },
-    "fontFamily": { "type": "string" }
+    "fontFamily": { "type": "string" },
+    "footerLinks": { "type": "component", "repeatable": true, "component": "navigation.link" }
   }
 }
 
