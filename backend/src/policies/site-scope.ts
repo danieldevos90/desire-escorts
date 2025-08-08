@@ -6,7 +6,10 @@ export default (policyCtx: any, _config: any, { strapi }: { strapi: Core.Strapi 
   const q = policyCtx.request.query;
   q.filters = {
     ...(q.filters || {}),
-    sites: { domain: { $eq: host } },
+    $or: [
+      { sites: { domain: { $eq: host } } }, // many-to-many
+      { site: { domain: { $eq: host } } },  // single relation
+    ],
   };
   return true;
 };

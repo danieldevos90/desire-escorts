@@ -7,7 +7,8 @@
     "slug": { "type": "uid", "targetField": "name", "required": true },
     "description": { "type": "text" },
     "seo": { "type": "component", "component": "seo.seo" },
-    "profiles": { "type": "relation", "relation": "oneToMany", "target": "api::profile.profile", "mappedBy": "city" }
+    "profiles": { "type": "relation", "relation": "oneToMany", "target": "api::profile.profile", "mappedBy": "city" },
+    "sites": { "type": "relation", "relation": "manyToMany", "target": "api::site.site" }
   }
 }
 

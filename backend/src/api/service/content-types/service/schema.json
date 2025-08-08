@@ -6,7 +6,8 @@
     "name": { "type": "string", "required": true },
     "slug": { "type": "uid", "targetField": "name", "required": true },
     "description": { "type": "text" },
-    "profiles": { "type": "relation", "relation": "manyToMany", "target": "api::profile.profile", "mappedBy": "services" }
+    "profiles": { "type": "relation", "relation": "manyToMany", "target": "api::profile.profile", "mappedBy": "services" },
+    "sites": { "type": "relation", "relation": "manyToMany", "target": "api::site.site" }
   }
 }
 
