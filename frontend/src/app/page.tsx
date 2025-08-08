@@ -33,11 +33,12 @@ export default async function Home() {
 
   let home: Home | undefined;
   try {
-    const res = await fetchFromStrapi<{ data: Home }>({
+    const res = await fetchFromStrapi<{ data: any }>({
       path: "/homepage",
       searchParams: { populate: "*" },
     });
-    home = res.data;
+    const raw = (res as any)?.data;
+    home = (raw?.attributes ?? raw) as Home;
   } catch {
     home = undefined;
   }
