@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_site_overrides",
+  "info": { "displayName": "SiteOverrides" },
+  "attributes": {
+    "site": { "type": "relation", "relation": "oneToOne", "target": "api::site.site" },
+    "customSlug": { "type": "string" },
+    "customSEO": { "type": "component", "component": "seo.seo" },
+    "isFeatured": { "type": "boolean" }
+  }
+}
+
+

@@ -8,8 +8,8 @@ export default {
     },
     {
       method: 'GET',
-      path: '/profiles/:id',
-      handler: 'profile.findOne',
+      path: '/profiles/:id', // supports slug or id
+      handler: 'api::profile.profile.findOne',
       config: { policies: ['global::site-scope'] },
     },
   ],
