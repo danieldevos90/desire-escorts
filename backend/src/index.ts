@@ -181,22 +181,46 @@ export default {
 
       let ams = await ensureOne('api::city.city', { slug: { $eq: 'amsterdam' } }, { name: 'Amsterdam', slug: 'amsterdam', sites: [site.id] });
       let rtd = await ensureOne('api::city.city', { slug: { $eq: 'rotterdam' } }, { name: 'Rotterdam', slug: 'rotterdam', sites: [site.id] });
+      let dhg = await ensureOne('api::city.city', { slug: { $eq: 'the-hague' } }, { name: 'The Hague', slug: 'the-hague', sites: [site.id] });
+      let utr = await ensureOne('api::city.city', { slug: { $eq: 'utrecht' } }, { name: 'Utrecht', slug: 'utrecht', sites: [site.id] });
+      let ehd = await ensureOne('api::city.city', { slug: { $eq: 'eindhoven' } }, { name: 'Eindhoven', slug: 'eindhoven', sites: [site.id] });
+      let grn = await ensureOne('api::city.city', { slug: { $eq: 'groningen' } }, { name: 'Groningen', slug: 'groningen', sites: [site.id] });
+      let hrl = await ensureOne('api::city.city', { slug: { $eq: 'haarlem' } }, { name: 'Haarlem', slug: 'haarlem', sites: [site.id] });
       ams = await publishIfUnpublished('api::city.city', ams);
       rtd = await publishIfUnpublished('api::city.city', rtd);
+      dhg = await publishIfUnpublished('api::city.city', dhg);
+      utr = await publishIfUnpublished('api::city.city', utr);
+      ehd = await publishIfUnpublished('api::city.city', ehd);
+      grn = await publishIfUnpublished('api::city.city', grn);
+      hrl = await publishIfUnpublished('api::city.city', hrl);
 
       let massage = await ensureOne('api::service.service', { slug: { $eq: 'massage' } }, { name: 'Massage', slug: 'massage' });
       let companion = await ensureOne('api::service.service', { slug: { $eq: 'companionship' } }, { name: 'Companionship', slug: 'companionship' });
       let dinner = await ensureOne('api::service.service', { slug: { $eq: 'dinner-date' } }, { name: 'Dinner Date', slug: 'dinner-date' });
       let gfe = await ensureOne('api::service.service', { slug: { $eq: 'girlfriend-experience' } }, { name: 'Girlfriend Experience', slug: 'girlfriend-experience' });
+      let nuru = await ensureOne('api::service.service', { slug: { $eq: 'nuru-massage' } }, { name: 'Nuru Massage', slug: 'nuru-massage' });
+      let roleplay = await ensureOne('api::service.service', { slug: { $eq: 'roleplay' } }, { name: 'Roleplay', slug: 'roleplay' });
+      let bdsm = await ensureOne('api::service.service', { slug: { $eq: 'bdsm' } }, { name: 'BDSM', slug: 'bdsm' });
+      let duo = await ensureOne('api::service.service', { slug: { $eq: 'duo' } }, { name: 'Duo', slug: 'duo' });
       massage = await publishIfUnpublished('api::service.service', massage);
       companion = await publishIfUnpublished('api::service.service', companion);
       dinner = await publishIfUnpublished('api::service.service', dinner);
       gfe = await publishIfUnpublished('api::service.service', gfe);
+      nuru = await publishIfUnpublished('api::service.service', nuru);
+      roleplay = await publishIfUnpublished('api::service.service', roleplay);
+      bdsm = await publishIfUnpublished('api::service.service', bdsm);
+      duo = await publishIfUnpublished('api::service.service', duo);
 
       let english = await ensureOne('api::language.language', { slug: { $eq: 'english' } }, { name: 'English', slug: 'english' });
       let dutch = await ensureOne('api::language.language', { slug: { $eq: 'dutch' } }, { name: 'Dutch', slug: 'dutch' });
+      let german = await ensureOne('api::language.language', { slug: { $eq: 'german' } }, { name: 'German', slug: 'german' });
+      let french = await ensureOne('api::language.language', { slug: { $eq: 'french' } }, { name: 'French', slug: 'french' });
+      let spanish = await ensureOne('api::language.language', { slug: { $eq: 'spanish' } }, { name: 'Spanish', slug: 'spanish' });
       english = await publishIfUnpublished('api::language.language', english);
       dutch = await publishIfUnpublished('api::language.language', dutch);
+      german = await publishIfUnpublished('api::language.language', german);
+      french = await publishIfUnpublished('api::language.language', french);
+      spanish = await publishIfUnpublished('api::language.language', spanish);
 
       let anna = await ensureOne('api::profile.profile', { slug: { $eq: 'anna' } }, {
         name: 'Anna', slug: 'anna', shortBio: 'Sample profile', verified: true, featured: true,
@@ -217,6 +241,68 @@ export default {
         sites: [site.id],
       });
       sofia = await publishIfUnpublished('api::profile.profile', sofia);
+
+      // Additional sample profiles
+      const sampleProfiles = [
+        { name: 'Luna', slug: 'luna', city: 'amsterdam', age: 24, height: 168, services: [gfe.id, nuru.id], languages: [english.id, dutch.id], price: 250, tags: ['brunette', 'petite', 'gfe'], attrs: { Hair: 'Brown', Eyes: 'Green', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: false },
+        { name: 'Mila', slug: 'mila', city: 'amsterdam', age: 28, height: 170, services: [massage.id, roleplay.id], languages: [english.id, german.id], price: 220, tags: ['blonde', 'natural'], attrs: { Hair: 'Blonde', Eyes: 'Blue', Tattoos: 'Yes', Smoker: 'No' }, verified: false, featured: true },
+        { name: 'Zara', slug: 'zara', city: 'rotterdam', age: 26, height: 172, services: [bdsm.id, duo.id], languages: [english.id, french.id], price: 300, tags: ['curvy', 'pse'], attrs: { Hair: 'Black', Eyes: 'Brown', Tattoos: 'No', Smoker: 'Occasional' }, verified: true, featured: false },
+        { name: 'Eva', slug: 'eva', city: 'the-hague', age: 22, height: 165, services: [gfe.id, dinner.id], languages: [english.id, dutch.id], price: 210, tags: ['petite', 'gfe'], attrs: { Hair: 'Brown', Eyes: 'Hazel', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: false },
+        { name: 'Noor', slug: 'noor', city: 'utrecht', age: 30, height: 175, services: [companion.id, roleplay.id], languages: [english.id, dutch.id], price: 260, tags: ['brunette', 'natural'], attrs: { Hair: 'Brown', Eyes: 'Brown', Tattoos: 'Yes', Smoker: 'No' }, verified: false, featured: false },
+        { name: 'Sasha', slug: 'sasha', city: 'eindhoven', age: 27, height: 169, services: [massage.id, nuru.id], languages: [english.id, russianId()], price: 230, tags: ['blonde', 'busty'], attrs: { Hair: 'Blonde', Eyes: 'Green', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: true },
+        { name: 'Lara', slug: 'lara', city: 'groningen', age: 25, height: 167, services: [gfe.id, companion.id], languages: [english.id, german.id], price: 240, tags: ['brunette', 'gfe'], attrs: { Hair: 'Brown', Eyes: 'Blue', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: false },
+        { name: 'Chloe', slug: 'chloe', city: 'haarlem', age: 29, height: 173, services: [dinner.id, roleplay.id], languages: [english.id, french.id], price: 280, tags: ['curvy', 'natural'], attrs: { Hair: 'Auburn', Eyes: 'Hazel', Tattoos: 'Yes', Smoker: 'No' }, verified: false, featured: false },
+        { name: 'Maya', slug: 'maya', city: 'amsterdam', age: 23, height: 166, services: [nuru.id, gfe.id], languages: [english.id, spanish.id], price: 225, tags: ['petite', 'natural'], attrs: { Hair: 'Black', Eyes: 'Brown', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: false },
+        { name: 'Isla', slug: 'isla', city: 'rotterdam', age: 31, height: 176, services: [bdsm.id, roleplay.id], languages: [english.id], price: 320, tags: ['pse', 'tattoos'], attrs: { Hair: 'Red', Eyes: 'Green', Tattoos: 'Yes', Smoker: 'No' }, verified: true, featured: true },
+        { name: 'Nina', slug: 'nina', city: 'utrecht', age: 24, height: 168, services: [companion.id, dinner.id], languages: [english.id, dutch.id], price: 210, tags: ['brunette'], attrs: { Hair: 'Brown', Eyes: 'Blue', Tattoos: 'No', Smoker: 'No' }, verified: false, featured: false },
+        { name: 'Elena', slug: 'elena', city: 'the-hague', age: 27, height: 171, services: [massage.id, duo.id], languages: [english.id, spanish.id], price: 250, tags: ['blonde', 'busty'], attrs: { Hair: 'Blonde', Eyes: 'Brown', Tattoos: 'No', Smoker: 'No' }, verified: true, featured: false },
+      ];
+
+      // Ensure a Russian language id if not existing helper
+      function russianId(): number {
+        return (global as any).__ru_id || 0;
+      }
+      try {
+        const ru = await ensureOne('api::language.language', { slug: { $eq: 'russian' } }, { name: 'Russian', slug: 'russian' });
+        const ruPub = await publishIfUnpublished('api::language.language', ru);
+        (global as any).__ru_id = ruPub.id;
+      } catch {}
+
+      const cityBySlug: Record<string, number> = {
+        'amsterdam': ams.id,
+        'rotterdam': rtd.id,
+        'the-hague': dhg.id,
+        'utrecht': utr.id,
+        'eindhoven': ehd.id,
+        'groningen': grn.id,
+        'haarlem': hrl.id,
+      };
+
+      for (const p of sampleProfiles) {
+        let existing = await es.findMany('api::profile.profile', { filters: { slug: { $eq: p.slug } }, limit: 1 });
+        const data = {
+          name: p.name,
+          slug: p.slug,
+          shortBio: 'Discreet and friendly',
+          age: p.age,
+          height: p.height,
+          verified: p.verified,
+          featured: p.featured,
+          city: cityBySlug[p.city],
+          languages: p.languages,
+          services: p.services,
+          sites: [site.id],
+          tags: (p.tags || []).map((t: string) => ({ __component: 'tag.tag', label: t, slug: t })),
+          attributesList: Object.entries(p.attrs || {}).map(([key, value]) => ({ __component: 'attribute.attribute', key, value })),
+          rates: [{ __component: 'rate-item.rate-item', label: '1 hour', price: p.price, currency: 'EUR' }],
+        } as any;
+        if (existing && Array.isArray(existing) && existing.length) {
+          existing = existing[0];
+          await es.update('api::profile.profile', (existing as any).id, { data });
+        } else {
+          await es.create('api::profile.profile', { data });
+        }
+      }
 
       // News
       const news1 = await ensureOne('api::news.news', { slug: { $eq: 'grand-opening' } }, { title: 'Grand opening', slug: 'grand-opening', excerpt: 'We are live with a curated selection of companions.', body: '<p>We are thrilled to launch our local site.</p>', site: site.id });
@@ -239,41 +325,42 @@ export default {
       });
       await publishIfUnpublished('api::page.page', servicesInfo);
 
-      const existingHomepage = await es.findMany('api::homepage.homepage', { limit: 1 });
-      if (existingHomepage && existingHomepage.length) {
-        await es.update('api::homepage.homepage', existingHomepage[0].id, {
-          data: {
-            hero: '<p>Welcome to Desire Escorts (local)</p>',
-            intro: '<p>Explore a curated selection of verified companions. Book with confidence and discretion.</p>',
-            whyUs: '<ul><li>Verified profiles</li><li>Discreet communication</li><li>Transparent rates</li></ul>',
-            benefits: [
-              { __component: 'tag.tag', label: 'Verified Escorts' },
-              { __component: 'tag.tag', label: 'Discreet Booking' },
-              { __component: 'tag.tag', label: 'Fast Response' }
-            ],
-            cta: { __component: 'contact.contact', phone: '+31 20 123 4567', whatsapp: '+31 612345678', telegram: 'desire_support' },
-            featuredProfiles: [anna.id, sofia.id],
-            featuredCities: [ams.id, rtd.id],
-            publishedAt: new Date().toISOString(),
-          },
-        });
-      } else {
-        await es.create('api::homepage.homepage', {
-          data: {
-            hero: '<p>Welcome to Desire Escorts (local)</p>',
-            intro: '<p>Explore a curated selection of verified companions. Book with confidence and discretion.</p>',
-            whyUs: '<ul><li>Verified profiles</li><li>Discreet communication</li><li>Transparent rates</li></ul>',
-            benefits: [
-              { __component: 'tag.tag', label: 'Verified Escorts' },
-              { __component: 'tag.tag', label: 'Discreet Booking' },
-              { __component: 'tag.tag', label: 'Fast Response' }
-            ],
-            cta: { __component: 'contact.contact', phone: '+31 20 123 4567', whatsapp: '+31 612345678', telegram: 'desire_support' },
-            featuredProfiles: [anna.id, sofia.id],
-            featuredCities: [ams.id, rtd.id],
-            publishedAt: new Date().toISOString(),
-          },
-        });
+      const homepageData = {
+        hero: '<p>Welcome to Desire Escorts (local)</p>',
+        intro: '<p>Explore a curated selection of verified companions. Book with confidence and discretion.</p>',
+        whyUs: '<ul><li>Verified profiles</li><li>Discreet communication</li><li>Transparent rates</li></ul>',
+        benefits: [
+          { __component: 'tag.tag', label: 'Verified Escorts' },
+          { __component: 'tag.tag', label: 'Discreet Booking' },
+          { __component: 'tag.tag', label: 'Fast Response' },
+        ],
+        cta: { phone: '+31 20 123 4567', whatsapp: '+31 612345678', telegram: 'desire_support' },
+        featuredProfiles: [anna.id, sofia.id],
+        featuredCities: [ams.id, rtd.id],
+        site: site.id,
+        publishedAt: new Date().toISOString(),
+      } as any;
+
+      try {
+        const docSvc = (strapi as any).documents?.bind(strapi);
+        if (docSvc) {
+          const api = docSvc('api::homepage.homepage');
+          const current = await api.findFirst();
+          if (current?.documentId) {
+            await api.update({ documentId: current.documentId, data: homepageData });
+          } else {
+            await api.create({ data: homepageData });
+          }
+        } else {
+          const existingHomepage = await es.findMany('api::homepage.homepage', { limit: 1 });
+          if (existingHomepage && existingHomepage.length) {
+            await es.update('api::homepage.homepage', existingHomepage[0].id, { data: homepageData });
+          } else {
+            await es.create('api::homepage.homepage', { data: homepageData });
+          }
+        }
+      } catch (e) {
+        strapi.log.warn(`Homepage seed update failed: ${(e as any)?.message || e}`);
       }
       // Footer links in brand
       try {

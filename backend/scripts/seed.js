@@ -64,25 +64,19 @@ async function ensureOne(es, uid, where, data) {
     profiles.push(created);
   }
 
-  // Homepage (single type)
+  // Homepage (per-site collection)
   try {
-    const existing = await es.findMany('api::homepage.homepage', { limit: 1 });
+    const existing = await es.findMany('api::homepage.homepage', { filters: { site: { id: { $eq: site.id } } }, limit: 1 });
+    const data = {
+      hero: '<p>Welcome to Desire Escorts (local)</p>',
+      featuredProfiles: profiles.map((p) => p.id),
+      featuredCities: cities.map((c) => c.id),
+      site: site.id,
+    };
     if (existing && existing.length) {
-      await es.update('api::homepage.homepage', existing[0].id, {
-        data: {
-          hero: '<p>Welcome to Desire Escorts (local)</p>',
-          featuredProfiles: profiles.map((p) => p.id),
-          featuredCities: cities.map((c) => c.id),
-        },
-      });
+      await es.update('api::homepage.homepage', existing[0].id, { data });
     } else {
-      await es.create('api::homepage.homepage', {
-        data: {
-          hero: '<p>Welcome to Desire Escorts (local)</p>',
-          featuredProfiles: profiles.map((p) => p.id),
-          featuredCities: cities.map((c) => c.id),
-        },
-      });
+      await es.create('api::homepage.homepage', { data });
     }
   } catch (e) {
     console.error('Failed to seed Homepage:', e?.message || e);

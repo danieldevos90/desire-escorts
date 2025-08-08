@@ -31,9 +31,12 @@ export interface BrandBrand extends Struct.ComponentSchema {
     displayName: 'Brand';
   };
   attributes: {
+    brandName: Schema.Attribute.String;
     fontFamily: Schema.Attribute.String;
     footerLinks: Schema.Attribute.Component<'navigation.link', true>;
+    headerLinks: Schema.Attribute.Component<'navigation.link', true>;
     logo: Schema.Attribute.Media;
+    logoAlt: Schema.Attribute.String;
     primaryColor: Schema.Attribute.String;
     secondaryColor: Schema.Attribute.String;
   };

@@ -1,6 +1,6 @@
 {
-  "kind": "singleType",
-  "collectionName": "pricing_single",
+  "kind": "collectionType",
+  "collectionName": "pricings",
   "info": { "singularName": "pricing", "pluralName": "pricing-single", "displayName": "Pricing" },
   "attributes": {
     "title": { "type": "string", "default": "Pricing" },

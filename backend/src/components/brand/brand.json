@@ -2,11 +2,14 @@
   "collectionName": "components_brand_brands",
   "info": { "displayName": "Brand" },
   "attributes": {
+    "brandName": { "type": "string" },
     "logo": { "type": "media", "required": false },
+    "logoAlt": { "type": "string" },
     "primaryColor": { "type": "string" },
     "secondaryColor": { "type": "string" },
     "fontFamily": { "type": "string" },
-    "footerLinks": { "type": "component", "repeatable": true, "component": "navigation.link" }
+    "footerLinks": { "type": "component", "repeatable": true, "component": "navigation.link" },
+    "headerLinks": { "type": "component", "repeatable": true, "component": "navigation.link" }
   }
 }
 

@@ -440,8 +440,8 @@ export interface ApiCityCity extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiContactContact extends Struct.SingleTypeSchema {
-  collectionName: 'contact_single';
+export interface ApiContactContact extends Struct.CollectionTypeSchema {
+  collectionName: 'contacts';
   info: {
     displayName: 'Contact';
     pluralName: 'contact-single';
@@ -474,8 +474,8 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiFaqFaq extends Struct.SingleTypeSchema {
-  collectionName: 'faq_single';
+export interface ApiFaqFaq extends Struct.CollectionTypeSchema {
+  collectionName: 'faqs';
   info: {
     displayName: 'FAQ';
     pluralName: 'faq-single';
@@ -501,8 +501,8 @@ export interface ApiFaqFaq extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
-  collectionName: 'homepage';
+export interface ApiHomepageHomepage extends Struct.CollectionTypeSchema {
+  collectionName: 'homepages';
   info: {
     displayName: 'Homepage';
     pluralName: 'homepages';
@@ -532,6 +532,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
+    site: Schema.Attribute.Relation<'manyToOne', 'api::site.site'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -643,7 +644,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    body: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -653,6 +653,9 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     noindex: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
+    sections: Schema.Attribute.DynamicZone<
+      ['tag.tag', 'brand.brand', 'contact.contact', 'seo.seo']
+    >;
     seo: Schema.Attribute.Component<'seo.seo', false>;
     site: Schema.Attribute.Relation<'manyToOne', 'api::site.site'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
@@ -663,8 +666,8 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPricingPricing extends Struct.SingleTypeSchema {
-  collectionName: 'pricing_single';
+export interface ApiPricingPricing extends Struct.CollectionTypeSchema {
+  collectionName: 'pricings';
   info: {
     displayName: 'Pricing';
     pluralName: 'pricing-single';
@@ -779,7 +782,8 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiSiteSettingsSiteSettings extends Struct.SingleTypeSchema {
+export interface ApiSiteSettingsSiteSettings
+  extends Struct.CollectionTypeSchema {
   collectionName: 'site_settings';
   info: {
     displayName: 'Site Settings';
@@ -802,6 +806,7 @@ export interface ApiSiteSettingsSiteSettings extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    site: Schema.Attribute.Relation<'manyToOne', 'api::site.site'>;
     siteName: Schema.Attribute.String;
     socialLinks: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;

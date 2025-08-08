@@ -1,8 +1,8 @@
 type Benefit = { label?: string };
-export default function HomeBenefits({ items }: { items?: Benefit[] }) {
+export default function HomeBenefits({ items, id }: { items?: Benefit[]; id?: string }) {
   if (!items?.length) return null;
   return (
-    <section className="section">
+    <section className="section" id={id}>
       <div className="container">
         <h2>Benefits</h2>
         <ul style={{ display: 'grid', gap: 'var(--space-2)', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>

@@ -1,6 +1,6 @@
 import { fetchFromStrapi } from "@/lib/api";
 
-export default async function NewsDetail({ params }: { params: { slug: string } }) {
+export default async function NewsDetail({ params }: { params: Promise<{ slug: string }> }) {
   if (!process.env.NEXT_PUBLIC_API_URL) {
     return (
       <main className="container p-6">
@@ -9,7 +9,7 @@ export default async function NewsDetail({ params }: { params: { slug: string } 
       </main>
     );
   }
-  const { slug } = params;
+  const { slug } = await params;
   try {
     const res = await fetchFromStrapi<{ data: Array<{ id: number; attributes: { title: string; body?: string } }> }>({
       path: "/news",

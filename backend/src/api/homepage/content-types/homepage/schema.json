@@ -1,6 +1,6 @@
 {
-  "kind": "singleType",
-  "collectionName": "homepage",
+  "kind": "collectionType",
+  "collectionName": "homepages",
   "info": { "singularName": "homepage", "pluralName": "homepages", "displayName": "Homepage" },
   "attributes": {
     "hero": { "type": "richtext" },
@@ -10,7 +10,8 @@
     "intro": { "type": "richtext" },
     "whyUs": { "type": "richtext" },
     "benefits": { "type": "component", "repeatable": true, "component": "tag.tag" },
-    "cta": { "type": "component", "component": "contact.contact" }
+    "cta": { "type": "component", "component": "contact.contact" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
   }
 }
 

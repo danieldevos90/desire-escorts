@@ -10,7 +10,7 @@ type SitesResponse = { data: Site[] };
 export default async function Footer() {
   let links: BrandLink[] = [];
   try {
-    const h = headers();
+    const h = await headers();
     const host = h.get("host") || "localhost:3000";
     const res = await fetchFromStrapi<SitesResponse>({ path: "/sites", searchParams: { populate: "brand", "filters[domain][$eq]": host } });
     const site = res.data?.[0];

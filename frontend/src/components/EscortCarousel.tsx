@@ -7,12 +7,13 @@ type Props = {
   title?: string;
   subtitle?: string;
   className?: string;
+  id?: string;
 };
 
-export default function EscortCarousel({ escorts, title, subtitle, className = "" }: Props) {
+export default function EscortCarousel({ escorts, title, subtitle, className = "", id }: Props) {
   if (!escorts || escorts.length === 0) return null;
   return (
-    <section className={["section", className].filter(Boolean).join(" ")}>      
+    <section className={["section", className].filter(Boolean).join(" ")} id={id}>      
       <div className="container">
         {(title || subtitle) && (
           <div style={{ marginBottom: "var(--space-4)" }}>

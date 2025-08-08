@@ -1,12 +1,12 @@
 type CTA = { phone?: string; whatsapp?: string; telegram?: string };
 
-export default function HomeCTA({ cta }: { cta?: CTA }) {
+export default function HomeCTA({ cta, id }: { cta?: CTA; id?: string }) {
   const phone = cta?.phone;
   const whatsapp = cta?.whatsapp;
   const telegram = cta?.telegram;
   if (!(phone || whatsapp || telegram)) return null;
   return (
-    <section className="section">
+    <section className="section" id={id}>
       <div className="container" style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center' }}>
         {whatsapp && (
           <a className="btn btn-primary" href={`https://wa.me/${whatsapp.replace(/[^0-9]/g,'')}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>

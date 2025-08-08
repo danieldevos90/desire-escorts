@@ -1,6 +1,6 @@
 {
-  "kind": "singleType",
-  "collectionName": "contact_single",
+  "kind": "collectionType",
+  "collectionName": "contacts",
   "info": { "singularName": "contact", "pluralName": "contact-single", "displayName": "Contact" },
   "attributes": {
     "title": { "type": "string", "default": "Contact" },

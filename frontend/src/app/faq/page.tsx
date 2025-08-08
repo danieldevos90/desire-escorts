@@ -14,8 +14,8 @@ export default async function FAQPage() {
   }
   let faq: FAQItem | undefined;
   try {
-    const res = await fetchFromStrapi<{ data: FAQItem }>({ path: "/faq", searchParams: { populate: "*" } });
-    faq = res.data;
+    const res = await fetchFromStrapi<{ data: FAQItem[] }>({ path: "/faqs", searchParams: { populate: "*", "pagination[page]": 1, "pagination[pageSize]": 1 } });
+    faq = res.data?.[0];
   } catch {
     faq = undefined;
   }

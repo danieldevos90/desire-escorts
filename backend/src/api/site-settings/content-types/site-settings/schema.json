@@ -1,12 +1,13 @@
 {
-  "kind": "singleType",
+  "kind": "collectionType",
   "collectionName": "site_settings",
   "info": { "singularName": "site-settings", "pluralName": "site-settings-single", "displayName": "Site Settings" },
   "attributes": {
     "siteName": { "type": "string" },
     "defaultSEO": { "type": "component", "component": "seo.seo" },
     "socialLinks": { "type": "json" },
-    "legalPagesRefs": { "type": "json" }
+    "legalPagesRefs": { "type": "json" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
   }
 }
 

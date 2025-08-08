@@ -1,6 +1,6 @@
 {
-  "kind": "singleType",
-  "collectionName": "faq_single",
+  "kind": "collectionType",
+  "collectionName": "faqs",
   "info": { "singularName": "faq", "pluralName": "faq-single", "displayName": "FAQ" },
   "attributes": {
     "title": { "type": "string", "default": "FAQ" },

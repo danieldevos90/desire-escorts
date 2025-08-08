@@ -23,7 +23,8 @@ type ButtonAsLink = BaseProps &
 export default function Button(
   props: PropsWithChildren<ButtonAsButton | ButtonAsLink>
 ) {
-  const { variant = "primary", size = "md", className = "", children, ...rest } = props as any;
+  const { variant = "primary", size = "md", className = "", children, ...rest } =
+    props as ButtonAsButton | ButtonAsLink;
   const classes = [
     "btn",
     variant ? `btn-${variant}` : "",
@@ -37,13 +38,13 @@ export default function Button(
     const { href, ...anchorProps } = rest as ButtonAsLink;
     if (href.startsWith("/")) {
       return (
-        <Link href={href} className={classes} {...(anchorProps as any)}>
+        <Link href={href} className={classes} {...(anchorProps as AnchorHTMLAttributes<HTMLAnchorElement>)}>
           {children}
         </Link>
       );
     }
     return (
-      <a href={href} className={classes} {...(anchorProps as any)}>
+      <a href={href} className={classes} {...(anchorProps as AnchorHTMLAttributes<HTMLAnchorElement>)}>
         {children}
       </a>
     );

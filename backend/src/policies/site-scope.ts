@@ -18,11 +18,13 @@ export default async (policyCtx: any, _config: any, { strapi }: { strapi: Core.S
   } catch {}
 
   const handler: string = policyCtx?.state?.route?.handler || '';
-  const useSingle = /(api::page\.|api::faq\.|api::homepage\.|api::site-settings\.)/.test(handler);
-  const relationKey = useSingle ? 'site' : 'sites';
+  // Decide relation key per content-type. Some use singular 'site', others plural 'sites'.
+  // Treat page, faq, homepage, site-settings, news, contact, pricing as 'site' relations.
+  const useSiteSingular = /(api::page\.|api::faq\.|api::homepage\.|api::site-settings\.|api::news\.|api::contact\.|api::pricing\.)/.test(handler);
+  const relationKey = useSiteSingular ? 'site' : 'sites';
 
   // If we cannot resolve a site id, ensure no results by applying an impossible filter
-  const siteFilter = useSingle
+  const siteFilter = useSiteSingular
     ? { id: (siteId ?? -1) as any }
     : { id: { $in: (siteId ? [siteId] : [-1]) as any } };
 

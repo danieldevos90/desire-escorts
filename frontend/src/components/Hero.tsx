@@ -3,11 +3,12 @@ type HeroProps = {
   subtitle?: string;
   ctaHref?: string;
   ctaLabel?: string;
+  id?: string;
 };
 
-export default function Hero({ title, subtitle, ctaHref, ctaLabel }: HeroProps) {
+export default function Hero({ title, subtitle, ctaHref, ctaLabel, id }: HeroProps) {
   return (
-    <section className="hero">
+    <section className="hero" id={id}>
       <div className="container">
         <h1 className="hero-title">{title}</h1>
         {subtitle && <p className="hero-subtitle">{subtitle}</p>}

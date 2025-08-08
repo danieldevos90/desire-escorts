@@ -1,6 +1,7 @@
 import { fetchFromStrapi } from "@/lib/api";
 
-type Page = { id: number; attributes: { title: string; slug: string; body?: string; heroImage?: { data?: { attributes?: { url: string } } } } };
+type PageSection = Record<string, unknown>;
+type Page = { id: number; attributes: { title: string; slug: string; sections?: PageSection[]; heroImage?: { data?: { attributes?: { url: string } } } } };
 
 export default async function CmsPage({ params }: { params: Promise<{ slug: string }> }) {
   if (!process.env.NEXT_PUBLIC_API_URL) {
@@ -14,7 +15,7 @@ export default async function CmsPage({ params }: { params: Promise<{ slug: stri
   const { slug } = await params;
   const res = await fetchFromStrapi<{ data: Page[] }>({
     path: "/pages",
-    searchParams: { "filters[slug][$eq]": slug, populate: "heroImage" },
+    searchParams: { "filters[slug][$eq]": slug, populate: "heroImage,sections" },
   });
   const page = res.data?.[0];
   if (!page) {
@@ -38,8 +39,8 @@ export default async function CmsPage({ params }: { params: Promise<{ slug: stri
       )}
       <section className="section">
         <div className="container">
-          {page.attributes.body ? (
-            <div className="prose" dangerouslySetInnerHTML={{ __html: page.attributes.body }} />
+          {Array.isArray(page.attributes.sections) && page.attributes.sections.length > 0 ? (
+            <pre style={{ whiteSpace: 'pre-wrap' }}>{JSON.stringify(page.attributes.sections, null, 2)}</pre>
           ) : (
             <p className="muted">No content.</p>
           )}

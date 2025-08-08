@@ -30,8 +30,14 @@ export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOpti
   // Propagate the site host to Strapi so server-side policy can scope by site
   if (typeof window === "undefined") {
     const incoming = await nextHeaders();
-    const host = incoming.get("host");
+    const envHost = (process.env.NEXT_PUBLIC_SITE_HOST || "").trim();
+    const host = envHost || incoming.get("host");
     if (host) headers.set("x-forwarded-host", host);
+  } else {
+    try {
+      const host = window.location?.host;
+      if (host) headers.set("x-forwarded-host", host);
+    } catch {}
   }
 
   const token = process.env.STRAPI_API_TOKEN;
@@ -53,6 +59,14 @@ export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOpti
   }
 
   return res.json();
+}
+
+export function resolveMediaUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  if (/^https?:\/\//i.test(url)) return url;
+  const base = (process.env.NEXT_PUBLIC_STRAPI_URL || '').replace(/\/$/, '');
+  if (!base) return url;
+  return `${base}${url.startsWith('/') ? '' : '/'}${url}`;
 }
 
 
