@@ -1,0 +1,26 @@
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.cache/
+.next/
+out/
+coverage/
+.env
+.env.*
+# Editors
+*.swp
+.vscode/
+.idea/
+*.log
+# Misc
+*.local
