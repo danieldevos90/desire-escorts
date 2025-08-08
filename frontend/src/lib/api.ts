@@ -14,12 +14,10 @@ export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOpti
     }
   }
 
-  const headers: HeadersInit = {
-    ...(init?.headers || {}),
-  };
+  const headers = new Headers(init?.headers as HeadersInit);
 
   const token = process.env.STRAPI_API_TOKEN;
-  if (token) headers["Authorization"] = `Bearer ${token}`;
+  if (token) headers.set("Authorization", `Bearer ${token}`);
 
   const res = await fetch(url.toString(), {
     ...init,
