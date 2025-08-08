@@ -3,6 +3,14 @@ import { fetchFromStrapi } from "@/lib/api";
 type City = { id: number; attributes: { name: string; slug: string } };
 
 export default async function CitiesPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  if (!process.env.NEXT_PUBLIC_API_URL) {
+    return (
+      <main className="container section">
+        <h1>Cities</h1>
+        <p className="muted" style={{ marginTop: 'var(--space-2)' }}>Set NEXT_PUBLIC_API_URL to load data from Strapi.</p>
+      </main>
+    );
+  }
   const { page = "1" } = await searchParams;
   const res = await fetchFromStrapi<{ data: City[]; meta: { pagination: { page: number; pageSize: number; pageCount: number; total: number } } }>({
     path: "/cities",
@@ -14,7 +22,9 @@ export default async function CitiesPage({ searchParams }: { searchParams: Promi
       <h1 className="text-2xl font-semibold">Cities</h1>
       <ul className="mt-4 list-disc pl-6">
         {data.map((c) => (
-          <li key={c.id}>{c.attributes.name}</li>
+          <li key={c.id}>
+            <a className="text-secondary" href={`/city/${c.attributes.slug}`}>{c.attributes.name}</a>
+          </li>
         ))}
       </ul>
       <div className="mt-4 flex gap-2">

@@ -6,7 +6,18 @@ export type FetchOptions = {
 };
 
 export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOptions): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
+  const rawBase = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "");
+  let baseUrl = rawBase;
+  // If base is not absolute (e.g. "/api"), try to prepend NEXT_PUBLIC_STRAPI_URL
+  if (!/^https?:\/\//i.test(baseUrl)) {
+    const strapiBase = (process.env.NEXT_PUBLIC_STRAPI_URL || "").replace(/\/$/, "");
+    if (strapiBase) {
+      baseUrl = `${strapiBase}${baseUrl.startsWith("/") ? "" : "/"}${baseUrl}`;
+    }
+  }
+  if (!/^https?:\/\//i.test(baseUrl)) {
+    throw new Error("Invalid NEXT_PUBLIC_API_URL. Provide an absolute URL, or set NEXT_PUBLIC_STRAPI_URL as the host.");
+  }
   const url = new URL(`${baseUrl}${path.startsWith("/") ? path : `/${path}`}`);
 
   if (searchParams) {
@@ -33,7 +44,12 @@ export async function fetchFromStrapi<T>({ path, searchParams, init }: FetchOpti
   });
 
   if (!res.ok) {
-    throw new Error(`Strapi request failed: ${res.status} ${res.statusText}`);
+    let details = '';
+    try {
+      details = await res.text();
+      details = details.slice(0, 500);
+    } catch {}
+    throw new Error(`Strapi request failed: ${res.status} ${res.statusText}${details ? ` - ${details}` : ''}`);
   }
 
   return res.json();

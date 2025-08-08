@@ -1,5 +1,16 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface AttributeAttribute extends Struct.ComponentSchema {
+  collectionName: 'components_profile_attributes';
+  info: {
+    displayName: 'Attribute';
+  };
+  attributes: {
+    key: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String;
+  };
+}
+
 export interface AvailabilityAvailability extends Struct.ComponentSchema {
   collectionName: 'components_availability_availabilities';
   info: {
@@ -77,15 +88,28 @@ export interface SiteOverridesSiteOverrides extends Struct.ComponentSchema {
   };
 }
 
+export interface TagTag extends Struct.ComponentSchema {
+  collectionName: 'components_common_tags';
+  info: {
+    displayName: 'Tag';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID<'label'>;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'attribute.attribute': AttributeAttribute;
       'availability.availability': AvailabilityAvailability;
       'brand.brand': BrandBrand;
       'contact.contact': ContactContact;
       'rate-item.rate-item': RateItemRateItem;
       'seo.seo': SeoSeo;
       'site-overrides.site-overrides': SiteOverridesSiteOverrides;
+      'tag.tag': TagTag;
     }
   }
 }

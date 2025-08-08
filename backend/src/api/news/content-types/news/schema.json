@@ -1,0 +1,16 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_items",
+  "info": { "singularName": "news", "pluralName": "news-items", "displayName": "News" },
+  "attributes": {
+    "title": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "title", "required": true },
+    "excerpt": { "type": "text" },
+    "body": { "type": "richtext" },
+    "cover": { "type": "media" },
+    "seo": { "type": "component", "component": "seo.seo" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
+  }
+}
+
+

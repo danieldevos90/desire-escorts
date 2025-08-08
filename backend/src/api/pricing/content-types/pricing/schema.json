@@ -1,0 +1,12 @@
+{
+  "kind": "singleType",
+  "collectionName": "pricing_single",
+  "info": { "singularName": "pricing", "pluralName": "pricing-single", "displayName": "Pricing" },
+  "attributes": {
+    "title": { "type": "string", "default": "Pricing" },
+    "rates": { "type": "component", "repeatable": true, "component": "rate-item.rate-item" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
+  }
+}
+
+

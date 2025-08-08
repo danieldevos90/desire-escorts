@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_common_tags",
+  "info": { "displayName": "Tag" },
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "slug": { "type": "uid", "targetField": "label" }
+  }
+}
+
+

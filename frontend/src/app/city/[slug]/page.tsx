@@ -1,20 +1,38 @@
 import { fetchFromStrapi } from "@/lib/api";
+import EscortGrid from "@/components/EscortGrid";
+import type { Escort } from "@/types/strapi";
 
 type StrapiItem<T> = { id: number; attributes: T };
 
-type City = {
-  name: string;
-  slug: string;
-  profiles?: { data: StrapiItem<{ name: string; slug: string }>[] };
-};
+type City = { name: string; slug: string };
 
 export default async function CityPage({ params }: { params: Promise<{ slug: string }> }) {
+  if (!process.env.NEXT_PUBLIC_API_URL) {
+    return (
+      <main className="container section">
+        <h1>City</h1>
+        <p className="muted" style={{ marginTop: 'var(--space-2)' }}>Set NEXT_PUBLIC_API_URL to load data from Strapi.</p>
+      </main>
+    );
+  }
   const { slug } = await params;
-  const res = await fetchFromStrapi<{ data: StrapiItem<City>[] }>({
+  const cityRes = await fetchFromStrapi<{ data: StrapiItem<City>[] }>({
     path: "/cities",
-    searchParams: { "filters[slug][$eq]": slug, populate: "profiles" },
+    searchParams: { "filters[slug][$eq]": slug },
   });
-  const city = res.data?.[0];
+  const city = cityRes.data?.[0];
+  const profRes = await fetchFromStrapi<{ data: Escort[] }>({
+    path: "/profiles",
+    searchParams: {
+      "filters[city][slug][$eq]": slug,
+      "populate[city]": "*",
+      "populate[photos]": "*",
+      "populate[rates]": "*",
+      "pagination[page]": 1,
+      "pagination[pageSize]": 24,
+    },
+  });
+  const profiles: Escort[] = (profRes.data as unknown as Escort[]) || [];
   if (!city) {
     return (
       <main className="max-w-3xl mx-auto p-6">
@@ -23,13 +41,17 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
     );
   }
   return (
-    <main className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold">{city.attributes.name}</h1>
-      <ul className="mt-4 list-disc pl-6">
-        {city.attributes.profiles?.data?.map((p) => (
-          <li key={p.id}>{p.attributes.name}</li>
-        ))}
-      </ul>
+    <main>
+      <section className="hero">
+        <div className="container">
+          <h1 className="hero-title">{city.attributes.name}</h1>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <EscortGrid escorts={profiles} />
+        </div>
+      </section>
     </main>
   );
 }

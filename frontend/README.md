@@ -34,3 +34,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Configuration
+
+Set these environment variables (locally in .env, and in Vercel Project Settings → Environment Variables):
+
+- `NEXT_PUBLIC_API_URL`: Public Strapi REST base URL (e.g. `https://cms.example.com/api`). Used by the frontend for fetching.
+- `STRAPI_API_TOKEN`: Strapi API token (Server only). Enables authenticated requests from server components.
+- `NEXT_PUBLIC_STRAPI_URL` (optional): Public asset base (e.g. `https://cms.example.com`). If omitted, asset URLs are derived from `NEXT_PUBLIC_API_URL`.
+- `REVALIDATE_SECRET` (optional): If using webhook-driven ISR revalidation at `POST /api/revalidate`.
+
+Brand tokens are provided at runtime by `GET /theme.css` from Strapi (based on host) and merged with local CSS tokens in `src/styles/tokens.css`. Components consume design tokens from `src/styles/components.css` and global rules from `src/styles/general.css`.
+
+Routes added:
+- `/escorts`: Escorts collection overview with cards
+- `/profiles/[slug]`: Escort profile detail
+- `/faq`: FAQ single type
+- `/pages/[slug]`: CMS subpages

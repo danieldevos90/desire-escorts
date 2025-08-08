@@ -1,17 +1,20 @@
 import { fetchFromStrapi } from "@/lib/api";
+import ProfileDetails from "@/components/ProfileDetails";
+import type { Escort } from "@/types/strapi";
 
 type StrapiResponse<T> = { data: T };
 
-type Profile = {
-  id: number;
-  attributes: {
-    name: string;
-    slug: string;
-    shortBio?: string;
-  };
-};
+type Profile = Escort;
 
 export default async function ProfilePage({ params }: { params: Promise<{ slug: string }> }) {
+  if (!process.env.NEXT_PUBLIC_API_URL) {
+    return (
+      <main className="container section">
+        <h1>Profile</h1>
+        <p className="muted" style={{ marginTop: 'var(--space-2)' }}>Set NEXT_PUBLIC_API_URL to load data from Strapi.</p>
+      </main>
+    );
+  }
   const { slug } = await params;
   const res = await fetchFromStrapi<StrapiResponse<Profile[]>>({
     path: "/profiles",
@@ -28,14 +31,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
       </main>
     );
   }
-  return (
-    <main className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-semibold">{profile.attributes.name}</h1>
-      {profile.attributes.shortBio && (
-        <p className="text-gray-600 mt-2">{profile.attributes.shortBio}</p>
-      )}
-    </main>
-  );
+  return <ProfileDetails profile={profile} />;
 }
 
 

@@ -1,0 +1,12 @@
+{
+  "kind": "singleType",
+  "collectionName": "faq_single",
+  "info": { "singularName": "faq", "pluralName": "faq-single", "displayName": "FAQ" },
+  "attributes": {
+    "title": { "type": "string", "default": "FAQ" },
+    "content": { "type": "richtext" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
+  }
+}
+
+

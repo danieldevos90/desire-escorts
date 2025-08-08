@@ -1,0 +1,111 @@
+{
+  "site": { "domain": "desire-escorts.nl", "name": "Desire Escorts" },
+  "services": [
+    { "name": "24 uurs Escort", "slug": "24-uurs-escort" },
+    { "name": "Anale Seks", "slug": "anale-seks" },
+    { "name": "BDSM Escorts", "slug": "bdsm-escorts" },
+    { "name": "Body 2 Body Massage", "slug": "body-2-body-massage" },
+    { "name": "Bondage Escort", "slug": "bondage-escort" },
+    { "name": "Business Escort", "slug": "business-escort" },
+    { "name": "Cardate Escort", "slug": "cardate-escort" },
+    { "name": "Dinnerdate Escort", "slug": "dinnerdate-escort" },
+    { "name": "Erotische Massage", "slug": "erotische-massage" },
+    { "name": "Escort Voor Stellen", "slug": "escort-voor-stellen" },
+    { "name": "Fetish Escort", "slug": "fetish-escort" },
+    { "name": "First Time Experience", "slug": "first-time-experience" },
+    { "name": "GFE Escorts", "slug": "gfe-escorts" },
+    { "name": "Hotel Escort", "slug": "hotel-escort" },
+    { "name": "Nuru Massage", "slug": "nuru-massage" },
+    { "name": "Orale Seks", "slug": "orale-seks" },
+    { "name": "Overnight Escort", "slug": "overnight-escort" },
+    { "name": "Rollenspel Escort", "slug": "rollenspel-escort" },
+    { "name": "SM Escort", "slug": "sm-escort" },
+    { "name": "Tantra Escort", "slug": "tantra-escort" },
+    { "name": "Trio Escorts", "slug": "trio-escorts" },
+    { "name": "Uitgaan Escort", "slug": "uitgaan-escort" },
+    { "name": "Voetfetish Escort", "slug": "voetfetish-escort" },
+    { "name": "Vrijgezellenfeest Escort", "slug": "vrijgezellenfeest-escort" },
+    { "name": "Aziatische Escort", "slug": "aziatische-escorts" },
+    { "name": "Blonde Escort", "slug": "blonde-escort-dames" },
+    { "name": "Brunette Escort", "slug": "brunette-escort-dames" },
+    { "name": "Europese Escort", "slug": "europese-escorts" },
+    { "name": "Gay Escort", "slug": "gay-escorts" },
+    { "name": "Goedkope escorts", "slug": "goedkope-escorts" },
+    { "name": "High Class Escort", "slug": "high-class-escorts" },
+    { "name": "Japanse Escort", "slug": "japanse-escorts" },
+    { "name": "Jonge Escort", "slug": "jonge-escorts" },
+    { "name": "Latina Escorts", "slug": "latina-escorts" },
+    { "name": "Marokkaanse Escort", "slug": "marokkaanse-escorts" },
+    { "name": "Mature escorts", "slug": "oudere-escorts" },
+    { "name": "Nederlandse Escort", "slug": "nederlandse-escorts" },
+    { "name": "Petite Escort", "slug": "petite-escorts" },
+    { "name": "Poolse Escort", "slug": "poolse-escorts" },
+    { "name": "Roemeense Escort", "slug": "roemeense-escorts" },
+    { "name": "Shemale Escort", "slug": "shemale-escorts" },
+    { "name": "Striptease Escort", "slug": "striptease-dames" },
+    { "name": "Studenten Escort", "slug": "studenten-escorts" },
+    { "name": "Turkse Escort", "slug": "turkse-escorts" },
+    { "name": "Zwarte Escort", "slug": "zwarte-escorts" }
+  ],
+  "cities": [
+    "Amsterdam", "Haarlem", "Alkmaar", "Schiphol", "Zaandam", "Hoofddorp", "Amstelveen", "Almere", "Utrecht", "Diemen",
+    "Rotterdam", "Den Haag", "Delft", "Leiden", "Gouda", "Schiedam", "Vlaardingen", "Spijkenisse", "Gorinchem",
+    "Zeist", "Nieuwegein", "Soest", "Woerden"
+  ],
+  "languages": ["Engels", "Nederlands"],
+  "profiles": [
+    {
+      "name": "Joy",
+      "slug": "joy",
+      "shortBio": "Joy is a bisexual beauty ready to fulfill your deepest desires.",
+      "bio": "Hey daar, ik ben Joy, jouw ultieme genotsbron!...",
+      "services": ["Erotische massage", "Gouden douche", "Orale seks", "Overnachting", "SM Rollenspel", "Trio met man", "Trio met stel", "Uitgaan", "Zoenen", "Dinnerdate"],
+      "cities": ["Amsterdam", "Haarlem"],
+      "languages": ["Engels"],
+      "rates": [{"label": "Per uur", "price": 160, "currency": "EUR"}]
+    },
+    {
+      "name": "Bella",
+      "slug": "bella",
+      "shortBio": "Exotische Hindoestaanse escort, dol op spannende verleiding.",
+      "bio": "Hallo daar! Ik ben Bella, jouw exotische Nederlands Hindoestaanse escort...",
+      "services": ["Erotische massage", "Gouden douche", "Orale seks", "Overnachting", "SM Rollenspel", "Trio met man", "Trio met stel", "Uitgaan", "Zoenen", "Dinnerdate"],
+      "cities": ["Amsterdam", "Utrecht"],
+      "languages": ["Engels", "Nederlands"],
+      "rates": [{"label": "Per uur", "price": 160, "currency": "EUR"}]
+    },
+    {
+      "name": "Ingrid",
+      "slug": "ingrid",
+      "shortBio": "Jouw ondeugende en sensuele escort, klaar om je fantasieën te vervullen.",
+      "bio": "Hey daar! Ik ben Ingrid, jouw ondeugende en sensuele escort...",
+      "services": ["Erotische massage", "Orale seks", "Overnachting", "Trio met man", "Uitgaan", "Zoenen", "Dinnerdate"],
+      "cities": ["Amsterdam", "Haarlem"],
+      "languages": ["Engels"],
+      "rates": [{"label": "Per uur", "price": 160, "currency": "EUR"}]
+    },
+    {
+      "name": "Noor",
+      "slug": "noor",
+      "shortBio": "Speelse en ondeugende escort, klaar om al je stoutste dromen waar te maken.",
+      "bio": "Hey daar, je hebt me gevonden! Ik ben Noor...",
+      "services": ["Erotische massage", "Gouden douche", "Orale seks", "Overnachting", "Trio met man", "Trio met stel", "Uitgaan", "Zoenen", "Dinnerdate"],
+      "cities": ["Amsterdam", "Almere"],
+      "languages": ["Engels"],
+      "rates": [{"label": "Per uur", "price": 160, "currency": "EUR"}]
+    }
+  ],
+  "pages": [
+    { "key": "about", "title": "OVER DESIRE ESCORTS", "content": "## Onze Missie..." },
+    { "key": "why", "title": "Waarom Desire Escorts", "content": "Wanneer u een escort wilt bestellen..." },
+    { "key": "contact", "title": "Contact", "content": "Escort bestellen? Neem nu contact...", "contact": { "phone": "+31642188911" } },
+    { "key": "faq", "title": "Veelgestelde Vragen", "content": "Welkom bij de Veelgestelde Vragen..." }
+  ],
+  "homepage": {
+    "hero": "<p>Welkom bij Desire Escorts</p>",
+    "featuredProfiles": ["joy", "bella"],
+    "featuredCities": ["Amsterdam", "Rotterdam"]
+  }
+}
+
+

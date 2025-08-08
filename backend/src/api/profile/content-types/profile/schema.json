@@ -11,6 +11,8 @@
     "height": { "type": "integer" },
     "nationality": { "type": "string" },
     "photos": { "type": "media", "multiple": true },
+    "tags": { "type": "component", "repeatable": true, "component": "tag.tag" },
+    "attributesList": { "type": "component", "repeatable": true, "component": "attribute.attribute" },
     "rates": { "type": "component", "repeatable": true, "component": "rate-item.rate-item" },
     "availability": { "type": "component", "repeatable": true, "component": "availability.availability" },
     "contact": { "type": "component", "repeatable": false, "component": "contact.contact" },

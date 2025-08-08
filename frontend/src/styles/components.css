@@ -1,0 +1,51 @@
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-4);
+  font-weight: 600;
+  line-height: var(--line-tight);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-secondary {
+  background: var(--color-secondary);
+  color: white;
+}
+
+/* Cards */
+.card {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.card-body { padding: var(--space-4); }
+.card-title { font-size: var(--text-lg); font-weight: 700; }
+.card-subtitle { color: var(--color-muted); font-size: var(--text-sm); }
+
+/* Layout */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 var(--space-4); }
+.section { padding: var(--space-10) 0; }
+.grid { display: grid; gap: var(--space-4); }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Utilities */
+.text-primary { color: var(--color-primary); }
+.bg-primary { background: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.bg-secondary { background: var(--color-secondary); }
+.muted { color: var(--color-muted); }
+.bordered { border: 1px solid var(--color-border); }
+
+

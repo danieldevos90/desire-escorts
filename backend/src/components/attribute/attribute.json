@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_profile_attributes",
+  "info": { "displayName": "Attribute" },
+  "attributes": {
+    "key": { "type": "string", "required": true },
+    "value": { "type": "string" }
+  }
+}
+
+

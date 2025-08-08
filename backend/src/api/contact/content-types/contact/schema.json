@@ -1,0 +1,16 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_single",
+  "info": { "singularName": "contact", "pluralName": "contact-single", "displayName": "Contact" },
+  "attributes": {
+    "title": { "type": "string", "default": "Contact" },
+    "content": { "type": "richtext" },
+    "phone": { "type": "string" },
+    "email": { "type": "email" },
+    "whatsapp": { "type": "string" },
+    "address": { "type": "string" },
+    "site": { "type": "relation", "relation": "manyToOne", "target": "api::site.site" }
+  }
+}
+
+
