@@ -194,14 +194,14 @@ export default {
       grn = await publishIfUnpublished('api::city.city', grn);
       hrl = await publishIfUnpublished('api::city.city', hrl);
 
-      let massage = await ensureOne('api::service.service', { slug: { $eq: 'massage' } }, { name: 'Massage', slug: 'massage' });
-      let companion = await ensureOne('api::service.service', { slug: { $eq: 'companionship' } }, { name: 'Companionship', slug: 'companionship' });
-      let dinner = await ensureOne('api::service.service', { slug: { $eq: 'dinner-date' } }, { name: 'Dinner Date', slug: 'dinner-date' });
-      let gfe = await ensureOne('api::service.service', { slug: { $eq: 'girlfriend-experience' } }, { name: 'Girlfriend Experience', slug: 'girlfriend-experience' });
-      let nuru = await ensureOne('api::service.service', { slug: { $eq: 'nuru-massage' } }, { name: 'Nuru Massage', slug: 'nuru-massage' });
-      let roleplay = await ensureOne('api::service.service', { slug: { $eq: 'roleplay' } }, { name: 'Roleplay', slug: 'roleplay' });
-      let bdsm = await ensureOne('api::service.service', { slug: { $eq: 'bdsm' } }, { name: 'BDSM', slug: 'bdsm' });
-      let duo = await ensureOne('api::service.service', { slug: { $eq: 'duo' } }, { name: 'Duo', slug: 'duo' });
+      let massage = await ensureOne('api::service.service', { slug: { $eq: 'massage' } }, { name: 'Massage', slug: 'massage', sites: [site.id] });
+      let companion = await ensureOne('api::service.service', { slug: { $eq: 'companionship' } }, { name: 'Companionship', slug: 'companionship', sites: [site.id] });
+      let dinner = await ensureOne('api::service.service', { slug: { $eq: 'dinner-date' } }, { name: 'Dinner Date', slug: 'dinner-date', sites: [site.id] });
+      let gfe = await ensureOne('api::service.service', { slug: { $eq: 'girlfriend-experience' } }, { name: 'Girlfriend Experience', slug: 'girlfriend-experience', sites: [site.id] });
+      let nuru = await ensureOne('api::service.service', { slug: { $eq: 'nuru-massage' } }, { name: 'Nuru Massage', slug: 'nuru-massage', sites: [site.id] });
+      let roleplay = await ensureOne('api::service.service', { slug: { $eq: 'roleplay' } }, { name: 'Roleplay', slug: 'roleplay', sites: [site.id] });
+      let bdsm = await ensureOne('api::service.service', { slug: { $eq: 'bdsm' } }, { name: 'BDSM', slug: 'bdsm', sites: [site.id] });
+      let duo = await ensureOne('api::service.service', { slug: { $eq: 'duo' } }, { name: 'Duo', slug: 'duo', sites: [site.id] });
       massage = await publishIfUnpublished('api::service.service', massage);
       companion = await publishIfUnpublished('api::service.service', companion);
       dinner = await publishIfUnpublished('api::service.service', dinner);
@@ -210,6 +210,18 @@ export default {
       roleplay = await publishIfUnpublished('api::service.service', roleplay);
       bdsm = await publishIfUnpublished('api::service.service', bdsm);
       duo = await publishIfUnpublished('api::service.service', duo);
+
+      // Ensure services are linked to current site (in case they already existed)
+      const ensureServiceSiteLink = async (svc: any) => {
+        try {
+          const current = await es.findOne('api::service.service', svc.id, { populate: ['sites'] });
+          const hasSite = Array.isArray((current as any)?.sites) && (current as any).sites.some((s: any) => s?.id === site.id);
+          if (!hasSite) {
+            await es.update('api::service.service', svc.id, { data: { sites: [site.id] } });
+          }
+        } catch {}
+      };
+      await Promise.all([massage, companion, dinner, gfe, nuru, roleplay, bdsm, duo].map(ensureServiceSiteLink));
 
       let english = await ensureOne('api::language.language', { slug: { $eq: 'english' } }, { name: 'English', slug: 'english' });
       let dutch = await ensureOne('api::language.language', { slug: { $eq: 'dutch' } }, { name: 'Dutch', slug: 'dutch' });
